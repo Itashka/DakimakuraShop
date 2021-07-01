@@ -1,0 +1,50 @@
+﻿@model IEnumerable<Project.Models.Order>
+
+    <div class="container p-3">
+        <div class="row pt-4">
+            <div class="col-6">
+                <h2 class="text-primary">Dakimakura List</h2>
+            </div>
+            <div class="col-6 text-right">
+                <a asp-controller="Dakimakura" asp-action="Create" class="btn btn-primary">Create new Dakimakura</a>
+            </div>
+        </div>
+        <br />
+
+        @if (Model.Count() > 0)
+        {
+            <div class=" container overflow-hidden">
+                <div class="row">
+                    @foreach (var obj in Model)
+                    {
+                            <div class="col-6">
+
+                                <div class="card p-3  my-2 border bg-light">
+                                    <a asp-action="Details" asp-route-Id="@obj.Id">
+                                        <h3>@obj.Dakimakura.Name</h3>
+                                        <h2>@obj.Id</h2>
+                                        <h3>@obj.User.Id</h3>
+                                    </a>
+                                    <p>тут будет описание инструмента (и картиночка), которое будет в бд, но я его прикручу потом (нет)</p>
+                                    <div class="w-100 btn-group" role="group">
+                                        @if (User.IsInRole("admin") || User.IsInRole("moderator"))
+                                        {
+                                            <a asp-controller="Dakimakura" asp-action="Update" asp-route-Id="@obj.Id" class="btn btn-primary mx-1 ">Update</a>
+                                        }
+                                        @if (User.IsInRole("admin"))
+                                        {
+                                            <a asp-controller="Dakimakura" asp-action="Delete" asp-route-Id="@obj.Id" class="btn btn-danger mx-1">Delete</a>
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                    }
+                </div>
+            </div>
+        }
+        else
+        {
+            <p>No items created yet</p>
+        }
+
+    </div>

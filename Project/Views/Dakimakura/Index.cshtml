@@ -1,0 +1,70 @@
+﻿@model IEnumerable<Project.Models.Dakimakura>
+
+<div class="container p-3">
+    <div class="row pt-4">
+        <div class="col-6">
+            <h2 class="text-primary">Dakimakura List</h2>
+        </div>
+        <div class="col-6 text-right">
+            <a asp-controller="Dakimakura" asp-action="Create" class="btn btn-primary">Create new Dakimakura</a>
+        </div>
+    </div>
+    <br />
+
+    @if (Model.Count() > 0)
+    {
+        <div class=" container overflow-hidden">
+            <div class="row">
+                @foreach (var obj in Model)
+                {<div class="col-6">
+
+                        <div class="card p-3  my-2 border bg-light">
+                            <a asp-action="Details" asp-route-Id="@obj.Id">
+                                <h3>@obj.Name</h3>
+                            </a>
+                            <div>
+                                <section>
+                                    <div class="row">
+                                        <!-- ASIDE -->
+                                        <div class="col-md-8 col-lg-3">
+                                            <div class="row">
+                                                <!-- ASIDE #1 -->
+                                                <aside class="col-sm-6 col-md-12 p-4">
+                                                    <img src="~/assets/images/Dakimakura/tenor.gif" class="img-thumbnail" alt="...">
+                                                </aside>
+                                                <aside class="col-sm-6 col-md-12">
+                                                    Цена: @obj.Cost руб
+                                                </aside>
+                                            </div>
+                                        </div>
+                                        <!-- MAIN -->
+                                        <main class="col-md-4 col-lg-9 p-4">
+                                               Тут будет написано, почему ты должен отдать всю стипухи за эту девочку :)
+                                        </main>
+                                    </div>
+                                </section>
+                            </div>
+                            <div class="w-100 btn-group" role="group">
+                                @if (User.IsInRole("admin") || User.IsInRole("moderator"))
+                                {
+                                    <a asp-controller="Dakimakura" asp-action="Update" asp-route-Id="@obj.Id" class="btn btn-primary mx-1 ">Update</a>
+                                }
+                                @if (User.IsInRole("admin"))
+                                   {
+                                    <a asp-controller="Dakimakura" asp-action="Delete" asp-route-Id="@obj.Id" class="btn btn-danger mx-1">Delete</a>
+                               }
+                            </div>
+                        </div>
+                    </div>
+
+
+                }
+            </div>
+        </div>
+    }
+    else
+    {
+        <p>No items created yet</p>
+    }
+
+</div>

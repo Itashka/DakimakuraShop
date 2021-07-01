@@ -1,0 +1,105 @@
+﻿@model Project.Models.ViewModels.DakimakuraVM
+
+<form method="post" asp-action="Update">
+    <input asp-for="Dakimakura.Id" hidden />
+    <div class="border p-3">
+
+        <div class="form-group row">
+            <h2 class="text-black-50 pl-3">Update Dakimakura</h2>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <div class="form-group row">
+                    <div class="col-4">
+                        <label asp-for="Dakimakura.Name"></label>
+                        <input asp-for="Dakimakura.Name" class="form-control" />
+                        <span asp-validation-for="Dakimakura.Name" class="text-danger"></span>
+                    </div>
+                    <div class="col-4">
+                        <label asp-for="Dakimakura.Cost"></label>
+                        <input asp-for="Dakimakura.Cost" class="form-control" />
+                        <span asp-validation-for="Dakimakura.Cost" class="text-danger"></span>
+                    </div>
+                    <div class="col-4">
+                        <label asp-for="Dakimakura.Brand"></label>
+                        <select asp-for="Dakimakura.BrandId" asp-items="@Model.DDBrand" class="form-control">
+                            <option selected>--Select Brand--</option>
+                        </select>
+                        <span asp-validation-for="Dakimakura.BrandId" class="text-danger"></span>
+                    </div>
+                    <div class="col-4">
+                        <label asp-for="Dakimakura.Country"></label>
+                        <select asp-for="Dakimakura.CountryId" asp-items="@Model.DDCountry" class="form-control">
+                            <option selected>--Select Country--</option>
+                        </select>
+                        <span asp-validation-for="Dakimakura.CountryId" class="text-danger"></span>
+                    </div>
+                    <div class="col-4">
+                        <label asp-for="Dakimakura.DakimakuraTypes"></label>
+                        <select asp-for="Dakimakura.TypeId" asp-items="@Model.DDType" class="form-control">
+                            <option selected>--Select Dakimakura Types--</option>
+                        </select>
+                        <span asp-validation-for="Dakimakura.TypeId" class="text-danger"></span>
+                    </div>
+                    <div class="col-4">
+                        <label asp-for="Dakimakura.Anime"></label>
+                        <input asp-for="Dakimakura.Anime" class="form-control" />
+                        <span asp-validation-for="Dakimakura.Anime" class="text-danger"></span>
+                    </div>
+                    <div class="col-4">
+                        <label asp-for="Dakimakura.Вimensions"></label>
+                        <input asp-for="Dakimakura.Вimensions" class="form-control" />
+                        <span asp-validation-for="Dakimakura.Вimensions" class="text-danger"></span>
+                    </div>
+                    <div class="col-4">
+                        <label asp-for="Dakimakura.Availability"></label>
+                        <input asp-for="Dakimakura.Availability" class="form-control" />
+                        <span asp-validation-for="Dakimakura.Availability" class="text-danger"></span>
+                    </div>
+                    <div class="col-4">
+                        <label asp-for="Dakimakura.Material"></label>
+                        <input asp-for="Dakimakura.Material" class="form-control" />
+                        <span asp-validation-for="Dakimakura.Material" class="text-danger"></span>
+                    </div>
+                    <div class="col-4">
+                        <label asp-for="Dakimakura.Print"></label>
+                        <input asp-for="Dakimakura.Print" class="form-control" />
+                        <span asp-validation-for="Dakimakura.Print" class="text-danger"></span>
+                    </div>
+                    <div class="col-4">
+                        <label asp-for="Dakimakura.Density"></label>
+                        <input asp-for="Dakimakura.Density" class="form-control" />
+                        <span asp-validation-for="Dakimakura.Density" class="text-danger"></span>
+                    </div>
+
+                    <div class="col-12">
+                        <label asp-for="Dakimakura.Description"></label>
+                        <div class="input-group">
+                            <span class="input-group-text">С текстовым полем</span>
+                            <textarea asp-for="Dakimakura.Description" class="form-control" aria-label="С текстовым полем"></textarea>
+                            <span asp-validation-for="Dakimakura.Description" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-8 offset-2 row">
+                        <div class="col">
+                            <input type="submit" class="btn btn-info w-75" value="create" />
+                        </div>
+                        <div class="col">
+                            <a asp-action="Index" class="btn btn-danger w-75">Back</a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</form>
+
+@section Scripts{
+    @{
+        <partial name="_ValidationScriptsPartial" />
+    }
+}
+

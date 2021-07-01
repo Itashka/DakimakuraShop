@@ -1,0 +1,117 @@
+﻿@using System.Security.Claims;
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Project</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    <script src="https://maps.api.2gis.ru/2.0/loader.js?pkg=full"></script>
+
+    <script type="text/javascript">
+        var map;
+
+        DG.then(function () {
+            map = DG.map('map', {
+                center: [54.513966, 26.247021],
+                zoom: 7
+            });
+            DG.marker([54.513966, 26.247021]).addTo(map).bindPopup('Центр продаж. Екатеринбург');
+            DG.marker([54.513966, 26.247021]).addTo(map).bindPopup('Центр продаж. Тюмень');
+            DG.marker([54.513966, 26.247021]).addTo(map).bindPopup('Центр продаж. Сургут');
+        });
+    </script>
+</head>
+<body>
+
+    <header class="bg-info">
+        <nav class="navbar navbar-expand-sm navbar-expand-lg navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+            <div class="container-fluid">
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Project</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                    <ul class="navbar-nav flex-grow-1">
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">На главную</a>
+                        </li>
+                        <!--
+    <li class="nav-item">
+        <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+    </li>
+    -->
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-controller="Dakimakura" asp-action="Index">Каталог</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-controller="Home" asp-action="About">О нас</a>
+                        </li>
+                        @if (User.IsInRole("admin") || User.IsInRole("moderator"))
+                        {
+
+                                    <li class="dropdown nav-item">
+                                        <a id="drop1" href="#" class="dropdown-toggle nav-link text-dark" data-toggle="dropdown">
+                                            Админка
+                                            <span class="caret"></span>
+                                        </a>
+                                        <ul class="dropdown-menu">
+                                            <li><a class="nav-link text-dark" asp-controller="Country" asp-action="Index">страны</a></li>
+                                            <li><a class="nav-link text-dark" asp-controller="Brand" asp-action="Index">бренды</a></li>
+                                            <li><a class="nav-link text-dark" asp-controller="Type" asp-action="Index">типы</a></li>
+                                            <li role="separator" class="divider"></li>
+                                            <li><a class="nav-link text-dark" asp-controller="Users" asp-action="Index">юзеры</a></li>
+                                            <li><a class="nav-link text-dark" asp-controller="Roles" asp-action="Index">роли</a></li>
+                                        </ul>
+                                    </li>
+                                                    }
+                    </ul>
+                    <ul class="navbar-nav">
+                        @if (User.Identity.IsAuthenticated)
+                        {
+            <li class="nav-item ">
+                <a class="nav-link text-dark" asp-controller="Users" asp-action="Details">@User.Identity.Name</a>
+            </li>
+
+                            <li class="nav-item">
+                                <form class="form-inline" method="post" asp-controller="Account" asp-action="Logout">
+                                    <button type="submit" class="nav-link btn btn-link text-dark">Выход</button>
+                                </form>
+                            </li> }
+                                        else
+                                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-controller="Account" asp-action="Login">Вход</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-controller="Account" asp-action="Register">Регистрация</a>
+                            </li>}
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="border-top footer text-muted">
+        <div class="container text-center">
+            &copy; 2021 Твоя мягкая вайфу -
+            <a asp-area="" asp-controller="Home" asp-action="Privacy">Политика конфиденциальности</a>
+            <a class="text-danger" href="https://github.com/Itashka">Itashka</a> - &copy; 2021
+        </div>
+
+    </footer>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
